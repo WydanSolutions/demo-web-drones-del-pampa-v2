@@ -75,6 +75,8 @@ PAGINAS.inicio = {
       </div>
     </section>
 
+    ${campoHTML()}
+
     <section class="bloque noche destacados">
       <div class="contenedor">
         <div class="cabecera"><div><span class="etiqueta"><i></i>DJI Agriculture</span><h2 class="titulo" data-dividir>${t('destacados')}</h2></div>
@@ -84,6 +86,8 @@ PAGINAS.inicio = {
       <div class="carrusel" id="carrusel">${dronesVisibles().map(tarjetaDron).join('')}</div>
       <div class="contenedor"><div class="carrusel-progreso" id="carrusel-progreso"><i></i></div></div>
     </section>
+
+    ${explorarHTML(t100)}
 
     ${curso ? `<section class="bloque niebla">
       <div class="contenedor"><a class="curso-banner foco" href="#/cursos/${curso.id}" data-aparece>
@@ -114,7 +118,7 @@ PAGINAS.inicio = {
     </section>`;
   },
   alMostrar(v){
-    iniciarHero(v);
+    iniciarHero(v); iniciarCampo(v); iniciarDronGuia(v); iniciarExplorar(v);
     activarCarrusel($('#carrusel', v));
     $$('.cuenta', v).forEach(cuentaRegresiva);
     $$('.ig-item', v).forEach(a => { const vid = $('video', a); if (!vid) return;

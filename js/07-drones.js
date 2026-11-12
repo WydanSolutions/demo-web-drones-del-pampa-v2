@@ -27,7 +27,7 @@ PAGINAS.drones = {
   titulo: id => id && dronDe(id) ? 'DJI ' + dronDe(id).nombre : t('p_drones'),
   html(id){ return id && dronDe(id) ? fichaDronHTML(dronDe(id)) : catalogoHTML(); },
   alMostrar(v, id){
-    if (id && dronDe(id)) { activarGiro($('.fd-visor', v)); return; }
+    if (id && dronDe(id)) { activarGiro($('.fd-visor', v)); iniciarExplorar(v); return; }
     $$('[data-comp]', v).forEach(c => c.onchange = () => { const i = c.dataset.comp;
       _comparar = c.checked ? [...new Set([..._comparar, i])].slice(-3) : _comparar.filter(z => z !== i); pintarBarraComparar(); });
     pintarBarraComparar();
@@ -128,6 +128,7 @@ function fichaDronHTML(x){
         </div>
       </aside>
     </div></section>
+    ${explorarHTML(x)}
     ${reps.length ? `<section class="bloque niebla"><div class="contenedor"><div class="cabecera"><h2 class="titulo chico">${t('repuestos_modelo')}</h2><a class="enlace" href="#/tienda?modelo=${encodeURIComponent(corto)}">${t('ver_todo')} ${icono('flecha')}</a></div>
       <div class="prods-grilla">${reps.map(p => tarjetaProducto(itemDe('prod:' + p.id))).join('')}</div></div></section>` : ''}
     <section class="bloque"><div class="contenedor"><h2 class="titulo chico">${t('otros_modelos')}</h2><div class="drones-grilla tres" style="margin-top:34px">${otros.map(tarjetaDron).join('')}</div></div></section>`;
