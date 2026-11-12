@@ -1,4 +1,4 @@
-# Drones del Pampa · Rivera — página comercial (demo · versión 2)
+# Drones del Pampa · Rivera — página comercial (demo)
 
 Demostración de la página comercial de **Drones del Pampa**, sucursal oficial Dragur en Rivera (Uruguay).
 

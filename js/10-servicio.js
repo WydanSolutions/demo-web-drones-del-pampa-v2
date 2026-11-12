@@ -14,7 +14,9 @@ PAGINAS.servicio = {
             <h1 class="titulo" data-dividir>${esc(tx(T.servTitulo))}</h1><p class="sub">${esc(tx(T.servSub))}</p>
             <div class="serv-garantia">${icono('escudo')}<div><b>${t('garantia')}</b><span>${t('garantia_txt')}</span></div></div>
             <a class="btn btn-azul magnetico" href="#turno" onclick="event.preventDefault();irATurno()">${icono('calendario')} ${t('agendar')}</a></div>
-          <div class="serv-hero-foto" data-aparece="zoom"><img src="${esc(cl.foto3 || cl.foto2)}" alt="${esc(cl.nombre)}"><div class="shf-tag"><b>${esc(cl.nombre)}</b><span>${esc(tx(cl.cargo))}</span></div></div>
+          <div class="serv-hero-foto ${cl.videoServicio ? 'con-video' : ''}" data-aparece="zoom">${cl.videoServicio
+            ? `<video src="${esc(cl.videoServicio)}" poster="${esc(cl.foto3 || cl.foto2)}" muted loop playsinline autoplay preload="auto" data-auto aria-label="${esc(cl.nombre)}"></video><button class="claudio-sonido" onclick="sonidoVideo(this)">${icono('mute')}<span>${t('sonido')}</span></button>`
+            : `<img src="${esc(cl.foto3 || cl.foto2)}" alt="${esc(cl.nombre)}">`}<div class="shf-tag"><b>${esc(cl.nombre)}</b><span>${esc(tx(cl.cargo))}</span></div></div>
         </div>
       </section>
       <section class="bloque niebla"><div class="contenedor">
@@ -26,7 +28,7 @@ PAGINAS.servicio = {
           <p class="sub">${IDIOMA === 'pt' ? 'Conte o que acontece com o equipamento. Confirmamos o dia pelo WhatsApp e, se precisar, buscamos.' : 'Contanos qué le pasa al equipo. Te confirmamos el día por WhatsApp y, si hace falta, lo pasamos a buscar.'}</p>
           <div class="consejos"><h3>${t('consejos')}</h3>
             <div class="consejos-vid"><div class="telefono"><video src="media/instagram/ig-revisiones.mp4" poster="media/instagram/ig-revisiones.jpg" muted loop playsinline preload="none" data-auto></video><button class="claudio-sonido" onclick="sonidoVideo(this)">${icono('mute')}<span>${t('sonido')}</span></button></div>
-              <div class="telefono"><video src="media/instagram/ig-t100-dual.mp4" poster="media/instagram/ig-t100-dual.jpg" muted loop playsinline preload="none" data-auto></video><button class="claudio-sonido" onclick="sonidoVideo(this)">${icono('mute')}<span>${t('sonido')}</span></button></div></div></div>
+              <div class="telefono"><video src="media/instagram/ig-repuestos.mp4" poster="media/instagram/ig-repuestos.jpg" muted loop playsinline preload="none" data-auto></video><button class="claudio-sonido" onclick="sonidoVideo(this)">${icono('mute')}<span>${t('sonido')}</span></button></div></div></div>
         </div>
         <form class="turno-form" id="f-turno" novalidate data-aparece="der">
           <div class="campo"><label>${t('s_equipo')}</label><div class="opciones">${[...dronesVisibles().map(x => x.nombre), t('s_otro')].map((n, i) => `<label class="opcion"><input type="radio" name="equipo" value="${esc(n)}" ${i ? '' : 'checked'}><span>${esc(n)}</span></label>`).join('')}</div></div>

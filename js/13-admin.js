@@ -104,7 +104,7 @@ function adminClaudio(){
   return `<div class="ad-cab"><div><h2>Claudio (el dueño)</h2><p>Aparece en el inicio, en Nosotros, en Servicio técnico y en todos los botones de WhatsApp.</p></div></div>
     <form class="ae-form ad-fijo" id="ad-fijo">
       ${campoAdmin('nombre', 'Nombre', 'texto', c.nombre)}${campoAdmin('cargo', 'Cargo', 'i18n', c.cargo)}
-      ${campoAdmin('foto', 'Foto de la cara (la redonda: menú, WhatsApp, portada)', 'img', c.foto)}${campoAdmin('foto2', 'Foto grande (inicio y Nosotros)', 'img', c.foto2)}${campoAdmin('foto3', 'Foto de Servicio técnico', 'img', c.foto3)}
+      ${campoAdmin('foto', 'Foto de la cara (la redonda: menú, WhatsApp, portada)', 'img', c.foto)}${campoAdmin('foto2', 'Foto grande (inicio y Nosotros)', 'img', c.foto2)}${campoAdmin('foto3', 'Foto de Servicio técnico (se ve si no hay video)', 'img', c.foto3)}${campoAdmin('videoServicio', 'Video de Servicio técnico (ruta o link a un .mp4; vacío = la foto)', 'texto', c.videoServicio)}
       ${campoAdmin('video', 'Video del inicio (ruta o link a un .mp4)', 'texto', c.video)}
       ${campoAdmin('frase', 'Su frase (inicio y Nosotros)', 'i18narea', c.frase)}${campoAdmin('historia', 'Historia de la empresa (Nosotros)', 'i18narea', c.historia)}
       <div class="ae-pie"><button class="btn btn-verde" type="submit">${icono('check')} Guardar</button></div></form>`;

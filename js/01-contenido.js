@@ -33,6 +33,7 @@ const CONTENIDO_INICIAL = {
     foto2: 'media/claudio/claudio-lanzamiento-t55.jpg',    // opción 7: presentando el T55 en el lanzamiento
     foto3: 'media/claudio/claudio-taller-t100.jpg',        // opción 2: trabajando en el T100 (la 5 no gustó en Servicio, 12/11/2026)
     video: 'media/instagram/ig-claudio-taller.mp4',
+    videoServicio: 'media/instagram/ig-t100-dual.mp4',   // Servicio técnico: Claudio armando el T100 (en vez de foto, 12/11/2026)
     frase: L('Antes de venderte un dron, queremos entender tu campo. Con mi equipo te asesoramos, te acompañamos en la puesta en marcha y el taller queda a la vuelta para lo que necesites.',
              'Antes de vender um drone, queremos entender o seu campo. Com a minha equipe assessoramos você, acompanhamos a colocação em marcha e a oficina fica perto para o que precisar.'),
     historia: L('Drones del Pampa nació en Rivera para acercar la agricultura de precisión a los productores del norte del país. Hoy somos la sucursal oficial de Dragur, representante de DJI Agriculture en Uruguay: vendemos los equipos, los reparamos en nuestro taller con repuestos originales y formamos a los pilotos que los van a volar.',
