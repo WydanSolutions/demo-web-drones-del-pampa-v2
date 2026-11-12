@@ -1,36 +1,50 @@
 /* =====================================================================
-   DRON QUE ACOMPAÑA AL BAJAR + CAMPO QUE SE FUMIGA (versión 2, 12/11/2026)
+   DRON QUE ACOMPAÑA AL BAJAR + CAMPO PARA FUMIGAR (versión 2, 12/11/2026)
    - En el inicio, un T100 visto desde arriba (con su sombra) va cruzando
      la página de un lado al otro mientras bajás, inclinándose en las curvas.
-   - En la sección «Así trabaja un Agras» la pantalla queda fija y el dron
-     recorre el campo dibujado pasada por pasada: lo que ya fumigó se pone
-     verde y abajo se cuentan las hectáreas y los litros (ejemplo a 10 L/ha).
-   Sin movimiento reducido (prefers-reduced-motion) no se muestra el dron
-   que acompaña y el campo aparece ya fumigado.
+   - «Así trabaja un Agras»: un campo dibujado con la ruta marcada. Se
+     completa ARRASTRANDO el dron por la ruta (pedido de la usuaria: no al
+     bajar la página). Lo fumigado se pone verde y se cuentan hectáreas,
+     litros y % (ejemplo a 10 L/ha). «Ver cómo lo hace solo» lo recorre
+     automáticamente y «Empezar de nuevo» lo deja seco otra vez.
+   Con movimiento reducido no se muestra el dron que acompaña.
    ===================================================================== */
 const CAMPO = { filas: 6, x0: 40, x1: 560, y0: 70, paso: 54, ha: 12, lha: 10 };
 
+// La ruta como una línea de puntos (ida y vuelta por cada pasada) y su largo
+function rutaCampo(){
+  const C = CAMPO, pts = [];
+  for (let i = 0; i < C.filas; i++) { const y = C.y0 + i * C.paso, a = i % 2 ? C.x1 : C.x0, b = i % 2 ? C.x0 : C.x1; pts.push([a, y], [b, y]); }
+  const acum = [0]; for (let k = 1; k < pts.length; k++) acum.push(acum[k - 1] + Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]));
+  return { pts, acum, total: acum[acum.length - 1] };
+}
+
 function campoHTML(){
-  const pt = IDIOMA === 'pt', C = CAMPO;
+  const pt = IDIOMA === 'pt', C = CAMPO, R = rutaCampo();
   const filas = Array.from({ length: C.filas }, (_, i) => {
     const y = C.y0 + i * C.paso;
     return `<g class="cf-fila"><rect class="cf-seco" x="${C.x0}" y="${y - 20}" width="${C.x1 - C.x0}" height="40" rx="6"/>
-      <rect class="cf-verde" id="cf-v${i}" x="${C.x0}" y="${y - 20}" width="0" height="40" rx="6"/>
+      <rect class="cf-verde" x="${C.x0}" y="${y - 20}" width="0" height="40" rx="6"/>
       ${Array.from({ length: 26 }, (_, k) => `<line class="cf-surco" x1="${C.x0 + 10 + k * 20}" y1="${y - 14}" x2="${C.x0 + 10 + k * 20}" y2="${y + 14}"/>`).join('')}</g>`;
   }).join('');
-  const ruta = Array.from({ length: C.filas }, (_, i) => { const y = C.y0 + i * C.paso, a = i % 2 ? C.x1 : C.x0, b = i % 2 ? C.x0 : C.x1; return `${i ? 'L' : 'M'}${a} ${y} L${b} ${y}`; }).join(' ');
-  return `<section class="campo-sec" id="campo-sec">
-    <div class="campo-pegado"><div class="contenedor campo-in">
+  const d = R.pts.map((p, k) => (k ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' ');
+  const fin = R.pts[R.pts.length - 1];
+  return `<section class="bloque campo-sec" id="campo-sec"><div class="contenedor campo-in">
       <div class="campo-txt">
         <span class="etiqueta"><i></i>${pt ? 'Assim trabalha um Agras' : 'Así trabaja un Agras'}</span>
         <h2 class="titulo chico">${pt ? 'Passada a passada, <b>sem pisar a lavoura</b>' : 'Pasada a pasada, <b>sin pisar el cultivo</b>'}</h2>
-        <p class="sub">${pt ? 'Você marca o lote no controle e o drone faz a rota sozinho: altura certa, gota uniforme e nenhum pedaço repetido ou esquecido.' : 'Marcás el lote en el control y el dron hace la ruta solo: altura justa, gota pareja y ningún pedazo repetido ni olvidado.'}</p>
+        <p class="sub">${pt ? 'Experimente: pegue o drone e leve-o pela linha. Assim ele trabalha no campo: rota marcada, altura certa e nenhum pedaço repetido ou esquecido.' : 'Probalo: agarrá el dron y llevalo por la línea. Así trabaja en el campo: ruta marcada, altura justa y ningún pedazo repetido ni olvidado.'}</p>
         <div class="campo-datos">
           <div><b id="cf-ha">0,0</b><small>${pt ? 'hectares' : 'hectáreas'}</small></div>
           <div><b id="cf-l">0</b><small>${pt ? 'litros aplicados' : 'litros aplicados'}</small></div>
           <div><b id="cf-p">0 %</b><small>${pt ? 'do lote' : 'del lote'}</small></div>
         </div>
-        <p class="campo-nota">${pt ? 'Exemplo ilustrativo: lote de 12 ha a 10 L/ha.' : 'Ejemplo ilustrativo: lote de 12 ha a 10 L/ha.'} <span class="campo-bajar">${icono('abajo')} ${pt ? 'Role para ver' : 'Bajá para verlo'}</span></p>
+        <div class="campo-listo" id="cf-listo">${icono('check')}<span>${pt ? '<b>Lote pronto!</b> 12 ha e 120 L, sem pisar uma planta.' : '<b>¡Lote terminado!</b> 12 ha y 120 L, sin pisar una planta.'}</span></div>
+        <div class="campo-btns">
+          <button type="button" class="btn btn-azul btn-chico" id="cf-solo">${icono('play')} ${pt ? 'Ver como ele faz sozinho' : 'Ver cómo lo hace solo'}</button>
+          <button type="button" class="btn btn-borde btn-chico" id="cf-reset">${pt ? 'Começar de novo' : 'Empezar de nuevo'}</button>
+        </div>
+        <p class="campo-nota">${pt ? 'Exemplo ilustrativo: lote de 12 ha a 10 L/ha.' : 'Ejemplo ilustrativo: lote de 12 ha a 10 L/ha.'}</p>
       </div>
       <div class="campo-mapa">
         <svg viewBox="0 0 600 420" aria-hidden="true">
@@ -38,44 +52,82 @@ function campoHTML(){
           <rect x="0" y="0" width="600" height="420" rx="26" fill="url(#cf-pasto)"/>
           <rect x="18" y="26" width="564" height="${C.filas * C.paso + 16}" rx="14" fill="#8a6b3c" opacity=".35"/>
           ${filas}
-          <path class="cf-ruta" d="${ruta}"/>
+          <path class="cf-ruta" d="${d}"/>
+          <g class="cf-meta"><circle cx="${fin[0]}" cy="${fin[1]}" r="9"/><path d="M${fin[0] - 4} ${fin[1]} l3 3 l6 -6"/></g>
           <g class="cf-poste"><line x1="575" y1="20" x2="575" y2="8"/><circle cx="575" cy="8" r="4"/></g>
         </svg>
-        <div class="cf-dron" id="cf-dron"><span class="cf-rocio"></span><span class="cf-sombra"></span><img src="media/drones/t100-arriba.png" alt=""></div>
+        <div class="cf-dron" id="cf-dron" role="slider" tabindex="0" aria-label="${pt ? 'Arraste o drone pela rota' : 'Arrastrá el dron por la ruta'}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="cf-rocio"></span><span class="cf-sombra"></span><img src="media/drones/t100-arriba.png" alt="" draggable="false"></div>
+        <div class="cf-pista" id="cf-pista"><span class="cf-mano">${icono('flecha')}</span>${pt ? 'Pegue o drone e leve-o pela linha' : 'Agarrá el dron y llevalo por la línea'}</div>
       </div>
-    </div></div>
-  </section>`;
+    </div></section>`;
 }
 
 function iniciarCampo(v){
   const sec = $('#campo-sec', v); if (!sec) return;
-  const C = CAMPO, dron = $('#cf-dron', sec), svg = $('.campo-mapa svg', sec), verdes = $$('.cf-verde', sec);
-  const ha = $('#cf-ha', sec), lt = $('#cf-l', sec), pc = $('#cf-p', sec);
-  let xPrev = null;
-  const dibujar = p => {
-    p = Math.max(0, Math.min(1, p));
-    const seg = p * C.filas, i = Math.min(C.filas - 1, Math.floor(seg)), t = Math.min(1, seg - i);
-    const giro = .12, enFila = Math.min(1, t / (1 - giro)), der = i % 2 === 0;
-    let x = der ? C.x0 + (C.x1 - C.x0) * enFila : C.x1 - (C.x1 - C.x0) * enFila, y = C.y0 + i * C.paso;
-    if (t > 1 - giro && i < C.filas - 1) y += C.paso * ((t - (1 - giro)) / giro);
-    verdes.forEach((r, j) => {
-      if (j < i || (j === i && p >= 1)) { r.setAttribute('x', C.x0); r.setAttribute('width', C.x1 - C.x0); }
-      else if (j > i) r.setAttribute('width', 0);
-      else { const w = (C.x1 - C.x0) * enFila; r.setAttribute('x', der ? C.x0 : C.x1 - w); r.setAttribute('width', w); }
-    });
-    // del dibujo (600 × 420) a la pantalla
-    const caja = svg.getBoundingClientRect(), mapa = dron.parentElement.getBoundingClientRect(), k = caja.width / 600;
-    dron.style.transform = `translate(${caja.left - mapa.left + x * k}px, ${caja.top - mapa.top + y * k}px) translate(-50%,-50%) rotate(${xPrev === null ? 0 : Math.max(-25, Math.min(25, (x - xPrev) * 1.4))}deg)`;
-    dron.classList.toggle('fumiga', t < 1 - giro && p > 0 && p < 1);
-    xPrev = x;
-    const hecho = Math.min(1, p) * C.ha;
-    ha.textContent = hecho.toLocaleString('es-UY', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    lt.textContent = Math.round(hecho * C.lha).toLocaleString('es-UY'); pc.textContent = Math.round(p * 100) + ' %';
+  const C = CAMPO, R = rutaCampo(), L = C.x1 - C.x0;
+  const dron = $('#cf-dron', sec), svg = $('.campo-mapa svg', sec), mapa = $('.campo-mapa', sec), verdes = $$('.cf-verde', sec);
+  const ha = $('#cf-ha', sec), lt = $('#cf-l', sec), pc = $('#cf-p', sec), pista = $('#cf-pista', sec), listo = $('#cf-listo', sec);
+  let s = 0, sMax = 0, xPrev = null, quieto = null, auto = null;
+
+  const punto = d => {                                   // posición sobre la ruta a la distancia d
+    d = Math.max(0, Math.min(R.total, d));
+    let k = 1; while (k < R.acum.length - 1 && R.acum[k] < d) k++;
+    const a = R.pts[k - 1], b = R.pts[k], t = (d - R.acum[k - 1]) / ((R.acum[k] - R.acum[k - 1]) || 1);
+    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
   };
-  const medir = () => { if (!sec.isConnected) return quitar(); const r = sec.getBoundingClientRect(), largo = r.height - innerHeight; dibujar(QUIETO ? 1 : largo > 0 ? -r.top / largo : 1); };
-  let pedido = false; const alBajar = () => { if (pedido) return; pedido = true; requestAnimationFrame(() => { pedido = false; medir(); }); };
-  const quitar = () => { window.removeEventListener('scroll', alBajar); window.removeEventListener('resize', alBajar); };
-  window.addEventListener('scroll', alBajar, { passive: true }); window.addEventListener('resize', alBajar); medir();
+  const masCerca = (x, y) => {                           // distancia sobre la ruta del punto más cercano al dedo
+    let mejor = 0, dmin = Infinity;
+    for (let k = 1; k < R.pts.length; k++) {
+      const a = R.pts[k - 1], b = R.pts[k], dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy || 1;
+      const t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy) / l2)), px = a[0] + dx * t, py = a[1] + dy * t, dd = (x - px) ** 2 + (y - py) ** 2;
+      if (dd < dmin) { dmin = dd; mejor = R.acum[k - 1] + Math.sqrt(l2) * t; }
+    }
+    return mejor;
+  };
+  const dibujar = () => {
+    const [x, y] = punto(s), caja = svg.getBoundingClientRect(), m = mapa.getBoundingClientRect(), k = caja.width / 600;
+    dron.style.transform = `translate(${caja.left - m.left + x * k}px, ${caja.top - m.top + y * k}px) translate(-50%,-50%) rotate(${xPrev === null ? 0 : Math.max(-25, Math.min(25, (x - xPrev) * 2))}deg)`;
+    xPrev = x;
+    // cada pasada empieza en i × (largo + giro); se pinta hasta lo más lejos que llegó el dron
+    verdes.forEach((r, i) => { const ini = i * (L + C.paso), w = Math.max(0, Math.min(L, sMax - ini)); r.setAttribute('width', w); r.setAttribute('x', i % 2 ? C.x1 - w : C.x0); });
+    const f = sMax / R.total, hecho = f * C.ha;
+    ha.textContent = hecho.toLocaleString('es-UY', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    lt.textContent = Math.round(hecho * C.lha).toLocaleString('es-UY'); pc.textContent = Math.round(f * 100) + ' %';
+    dron.setAttribute('aria-valuenow', Math.round(f * 100));
+    const termino = f >= .995; sec.classList.toggle('terminado', termino);
+    if (termino && !listo.dataset.festejo) { listo.dataset.festejo = 1; if (window.gsap && !QUIETO) gsap.fromTo(listo, { scale: .8, opacity: 0 }, { scale: 1, opacity: 1, duration: .7, ease: 'back.out(2)' }); }
+  };
+  const mover = (nuevo, desdeDedo) => {
+    // con el dedo no se puede saltar adelante: hay que seguir la ruta (sí se puede volver)
+    if (desdeDedo && nuevo > sMax + 70) return;
+    s = Math.max(0, Math.min(R.total, nuevo)); sMax = Math.max(sMax, s);
+    dron.classList.add('fumiga'); clearTimeout(quieto); quieto = setTimeout(() => dron.classList.remove('fumiga'), 220);
+    pista.classList.add('oculta'); dibujar();
+  };
+  const pararAuto = () => { if (auto) { auto.kill ? auto.kill() : cancelAnimationFrame(auto); auto = null; } };
+
+  // Arrastrar el dron (mouse o dedo)
+  const aDibujo = e => { const c = svg.getBoundingClientRect(), k = c.width / 600; return [(e.clientX - c.left) / k, (e.clientY - c.top) / k]; };
+  let arrastrando = false;
+  dron.addEventListener('pointerdown', e => { e.preventDefault(); pararAuto(); arrastrando = true; dron.setPointerCapture(e.pointerId); dron.classList.add('agarrado'); });
+  dron.addEventListener('pointermove', e => { if (!arrastrando) return; const [x, y] = aDibujo(e); mover(masCerca(x, y), true); });
+  const soltar = () => { arrastrando = false; dron.classList.remove('agarrado'); };
+  dron.addEventListener('pointerup', soltar); dron.addEventListener('pointercancel', soltar);
+  // Con el teclado: flechas para avanzar o volver
+  dron.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); mover(s + 30); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); mover(s - 30); } });
+  // «Ver cómo lo hace solo»
+  $('#cf-solo', sec).onclick = () => {
+    pararAuto(); if (s >= R.total - 1) { s = 0; sMax = 0; listo.dataset.festejo = ''; }
+    const resto = R.total - s, dur = Math.max(2, resto / R.total * 9);
+    if (window.gsap && !QUIETO) { const o = { v: s }; auto = gsap.to(o, { v: R.total, duration: dur, ease: 'none', onUpdate: () => mover(o.v) }); }
+    else mover(R.total);
+  };
+  $('#cf-reset', sec).onclick = () => { pararAuto(); s = 0; sMax = 0; xPrev = null; listo.dataset.festejo = ''; pista.classList.remove('oculta'); dibujar(); };
+  const alCambiar = () => { if (!sec.isConnected) { window.removeEventListener('resize', alCambiar); return; } dibujar(); };
+  window.addEventListener('resize', alCambiar);
+  requestAnimationFrame(dibujar); setTimeout(dibujar, 600);          // por si el diseño termina de acomodarse después
+  new IntersectionObserver(en => { if (en[0].isIntersecting) dibujar(); }).observe(mapa);
 }
 
 /* --- El dron que acompaña por toda la página de inicio --- */

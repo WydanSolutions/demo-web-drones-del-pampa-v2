@@ -65,3 +65,7 @@
 @media (max-width:700px){.equipo{grid-template-columns:1fr 1fr}.eq-dueno{grid-column:1/-1}}
 @media (max-width:420px){.eq{padding:18px 16px}.eq p{font-size:13.5px}}
 .wa-flotante .wa-logo svg{position:static;width:100%;height:auto;padding:0;background:none;border:0;border-radius:0}
+/* Logo más grande en la barra de arriba (pedido del 12/11/2026) */
+.logo-nav{height:60px}
+.nav.solido .logo-nav{height:52px}
+@media (max-width:820px){.logo-nav{height:48px}}

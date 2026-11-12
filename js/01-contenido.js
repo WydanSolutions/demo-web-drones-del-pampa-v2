@@ -31,7 +31,7 @@ const CONTENIDO_INICIAL = {
     cargo: L('Director de Drones del Pampa', 'Diretor da Drones del Pampa'),
     foto: 'media/claudio/claudio-perfil.jpg',              // su foto de perfil de Instagram (elegida por la usuaria, 12/11/2026)
     foto2: 'media/claudio/claudio-lanzamiento-t55.jpg',    // opción 7: presentando el T55 en el lanzamiento
-    foto3: 'media/claudio/claudio-taller-sentado.jpg',     // opción 5: en el taller, con los repuestos atrás
+    foto3: 'media/claudio/claudio-taller-t100.jpg',        // opción 2: trabajando en el T100 (la 5 no gustó en Servicio, 12/11/2026)
     video: 'media/instagram/ig-claudio-taller.mp4',
     frase: L('Antes de venderte un dron, queremos entender tu campo. Con mi equipo te asesoramos, te acompañamos en la puesta en marcha y el taller queda a la vuelta para lo que necesites.',
              'Antes de vender um drone, queremos entender o seu campo. Com a minha equipe assessoramos você, acompanhamos a colocação em marcha e a oficina fica perto para o que precisar.'),

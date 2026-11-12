@@ -7,7 +7,7 @@
    - Datos.importar(texto)  → vuelve a cargar un respaldo
    - Datos.restaurar()      → vuelve al contenido de ejemplo
    ===================================================================== */
-const VERSION_CONTENIDO = 4;   // 3: fotos nuevas de Claudio · 4: textos del equipo y «El equipo» (12/11/2026)
+const VERSION_CONTENIDO = 5;   // 3: fotos nuevas de Claudio · 4: textos del equipo y «El equipo» (12/11/2026)
 const CLAVE_DATOS = 'dronesdelpampa_web_v2';   // versión 2: su propia memoria, para no mezclarse con la base si se publican las dos
 
 const Datos = (() => {
