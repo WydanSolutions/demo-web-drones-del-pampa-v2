@@ -15,12 +15,11 @@ PAGINAS.inicio = {
       ['cursos', 'b_cursos', 'b_cursos_d', 'media/instagram/curso-operador.jpg']];
     const curso = cursosVisibles().find(c => c.fecha >= hoyISO()) || cursosVisibles()[0];
     const promos = d.promos.filter(p => p.visible !== false).slice(0, 3);
+    const P = portadaElegida();                 // portada elegida en el panel (06b-portadas.js)
     return `
     <section class="hero">
-      <div class="hero-card">
-        <div class="hero-fondo" data-prof="0.25">${fondoAmanecer()}</div>
-        <div class="hero-sol" aria-hidden="true"></div>
-        <canvas class="rocio" id="rocio"></canvas>
+      <div class="hero-card portada-${P}">
+        ${portadaFondo(P)}
         <div class="hero-grid">
           <div class="hero-txt">
             <span class="hero-chip">${icono('escudo')} ${esc(tx(T.heroEtiqueta))}</span>
@@ -31,16 +30,13 @@ PAGINAS.inicio = {
               <a class="btn btn-vidrio magnetico" href="#/tienda">${t('ir_tienda')}</a>
             </div>
           </div>
-          <div class="hero-escena">
-            <div class="hero-dron" data-prof="1"><img src="${esc(t100.imagenes[1] || t100.imagenes[0])}" alt="DJI ${esc(t100.nombre)}" fetchpriority="high"><i class="hero-sombra"></i></div>
-            <a class="hero-modelo" href="#/drones/${t100.id}"><small>${IDIOMA === 'pt' ? 'Novo' : 'Nuevo'}</small>DJI <b>${esc(t100.nombre)}</b>${icono('flecha')}</a>
-          </div>
+          <div class="hero-escena">${portadaEscena(P, t100)}</div>
         </div>
         <div class="hero-pie">
           <div class="hero-ubic">${icono('ubicacion')} Rivera · Uruguay</div>
-          <a class="hero-claudio" href="${waLink(msjClaudio())}" target="_blank" rel="noopener">
+          <a class="hero-claudio" href="#/nosotros">
             <img src="${esc(cl.foto)}" alt="${esc(cl.nombre)}">
-            <div><b>${esc(cl.nombre)}</b><small>${esc(tx(cl.cargo))}</small><span>${icono('wa')} ${t('hablar_claudio')}</span></div>
+            <div><b>${esc(cl.nombre)}</b><small>${esc(tx(cl.cargo))}</small><span>${t('conoce_equipo')} ${icono('flecha')}</span></div>
           </a>
         </div>
       </div>
@@ -172,6 +168,7 @@ function cuentaRegresiva(el){
 function iniciarHero(v){
   const card = $('.hero-card', v); if (!card) return;
   const t0 = performance.now(); iniciarRocio($('#rocio', v), $('.hero-dron img', v), () => performance.now() - t0 > 1900 ? 1 : 0);
+  iniciarVideosPortada(v); iniciarEstudio(v);
   if (MOVIL() || QUIETO || !window.gsap) return;
   const capas = $$('[data-prof]', card);
   card.addEventListener('pointermove', e => {

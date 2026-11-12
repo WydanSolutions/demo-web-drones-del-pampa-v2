@@ -116,9 +116,12 @@ function iniciarRocio(cv, dron, fuerza){
     g.clearRect(0, 0, w, h);
     const f = fuerza(), r = dron.getBoundingClientRect();
     if (f > .02 && r.width) {
-      const y0 = r.top - c.top + r.height * .64;
-      [.33, .67].forEach(px => { const x0 = r.left - c.left + r.width * px;
-        for (let k = 0; k < 4 * f; k++) gotas.push({ x: x0 + (Math.random() - .5) * 10, y: y0, vx: (Math.random() - .5) * 2.2, vy: 1.2 + Math.random() * 2.2, v: 1, r: .8 + Math.random() * 1.6 }); });
+      // Las gotas salen de los 4 picos reales de la barra (PICOS_T100), teniendo en cuenta cómo está recortada la foto
+      const cs = getComputedStyle(dron), pos = cs.objectPosition.split(' ').map(z => parseFloat(z) / 100), nw = dron.naturalWidth || 1, nh = dron.naturalHeight || 1;
+      const esc_ = cs.objectFit === 'cover' ? Math.max(r.width / nw, r.height / nh) : Math.min(r.width / nw, r.height / nh), dw = nw * esc_, dh = nh * esc_;
+      const ox = r.left - c.left + (r.width - dw) * (isNaN(pos[0]) ? .5 : pos[0]), oy = r.top - c.top + (r.height - dh) * (isNaN(pos[1]) ? .5 : pos[1]);
+      (typeof PICOS_T100 !== 'undefined' ? PICOS_T100 : [[.33, .64], [.67, .64]]).forEach(([px, py]) => { const x0 = ox + dw * px, y0 = oy + dh * py;
+        for (let k = 0; k < 3 * f; k++) gotas.push({ x: x0 + (Math.random() - .5) * 6, y: y0, vx: (Math.random() - .5) * 1.6, vy: 1.4 + Math.random() * 2, v: 1, r: .7 + Math.random() * 1.4 }); });
     }
     gotas = gotas.filter(p => p.v > 0 && p.y < h);
     for (const p of gotas) { p.x += p.vx; p.y += p.vy; p.vy += .05; p.vx *= .99; p.v -= .0095;

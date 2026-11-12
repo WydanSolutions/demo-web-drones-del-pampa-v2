@@ -95,6 +95,7 @@ function adminConfig(){
       ${campoAdmin('mapa', 'Dirección para el mapa (como la buscarías en Google Maps)', 'texto', c.mapa)}
       ${campoAdmin('horarios', 'Horarios', 'i18n', c.horarios)}
       ${campoAdmin('instagram', 'Link de Instagram', 'texto', c.instagram)}
+      ${campoAdmin('portada', 'Portada del inicio', 'portada', c.portada || 'video')}
       ${campoAdmin('clave', 'Contraseña de este panel', 'texto', c.clave)}
       <div class="ae-pie"><button class="btn btn-verde" type="submit">${icono('check')} Guardar datos</button></div></form>`;
 }
@@ -119,7 +120,7 @@ function activarFormFijo(c, id){
 function adminPortada(){
   const caja = (col) => `<button class="ad-caja grande" onclick="adminIr('${col}')"><b>${Datos.get()[col].length}</b><span>${ESQUEMAS[col].titulo}</span></button>`;
   return `<div class="ad-cab"><div><h2>Más contenido</h2><p>Lo que nos destaca, los pasos y las preguntas del servicio técnico y los tipos de service.</p></div></div>
-    <div class="ad-cajas">${caja('valores')}${caja('servicio')}${caja('faq')}${caja('tiposService')}</div>`;
+    <div class="ad-cajas">${caja('valores')}${caja('equipo')}${caja('servicio')}${caja('faq')}${caja('tiposService')}</div>`;
 }
 
 function tablaAdmin(cols, filas, vacio){

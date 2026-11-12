@@ -88,7 +88,7 @@ function abrirAsesor(){
     $('.asesor', $('#modal')).innerHTML = `<div class="as-barra"><i style="width:100%"></i></div><small>${t('te_recomendamos')}</small>
       <div class="as-res"><img src="${esc(x.imagenes[0])}" alt=""><h3>DJI <b>${esc(x.nombre)}</b></h3><p>${esc(tx(x.lema))}</p>
         <div class="as-btns"><a class="btn btn-azul" href="#/drones/${x.id}">${t('ver_ficha')} ${icono('flecha')}</a>
-        <a class="btn btn-wa" target="_blank" rel="noopener" href="${waLink((IDIOMA === 'pt' ? 'Olá Claudio! O assessor do site me recomendou o DJI ' : '¡Hola Claudio! El asesor de la página me recomendó el DJI ') + x.nombre)}">${icono('wa')} ${t('hablar_claudio')}</a></div>
+        <a class="btn btn-wa" target="_blank" rel="noopener" href="${waLink((IDIOMA === 'pt' ? 'Olá, Drones del Pampa! O assessor do site me recomendou o DJI ' : '¡Hola, Drones del Pampa! El asesor de la página me recomendó el DJI ') + x.nombre)}">${icono('wa')} ${t('hablar_claudio')}</a></div>
         <button class="as-otra" onclick="abrirAsesor()">${t('otra_vez')}</button></div>`;
     if (window.gsap) gsap.from('.as-res img', { scale: .6, opacity: 0, y: 40, duration: 1, ease: 'expo.out' });
   };
@@ -97,7 +97,7 @@ function abrirAsesor(){
 
 /* --- Ficha del dron (página propia) --- */
 function fichaDronHTML(x){
-  const msg = (IDIOMA === 'pt' ? 'Olá Claudio! Quero informações sobre o DJI ' : '¡Hola Claudio! Quiero información sobre el DJI ') + x.nombre;
+  const msg = (IDIOMA === 'pt' ? 'Olá, Drones del Pampa! Quero informações sobre o DJI ' : '¡Hola, Drones del Pampa! Quiero información sobre el DJI ') + x.nombre;
   const corto = x.nombre.replace(/^Agras\s*/i, '');
   const reps = Datos.get().productos.filter(p => p.visible !== false && (p.modelos || []).some(m => m.toLowerCase() === corto.toLowerCase())).slice(0, 4);
   const otros = dronesVisibles().filter(z => z.id !== x.id).slice(0, 3);
@@ -124,7 +124,7 @@ function fichaDronHTML(x){
           <small>${x.precio > 0 ? t('desde') : ''}</small>${precioHTML(x.precio, x.precioAntes)}<p>${t('precios_usd')}</p>
           <button class="btn btn-azul" onclick="agregarAlCarrito('dron:${x.id}', this)">${icono('carrito')} ${t('agregar')}</button>
           <a class="btn btn-wa" href="${waLink(msg)}" target="_blank" rel="noopener">${icono('wa')} ${t('hablar_claudio')}</a>
-          <div class="fd-claudio"><img src="${esc(Datos.get().claudio.foto)}" alt=""><span>${IDIOMA === 'pt' ? 'O Claudio assessora você pessoalmente e acompanha a entrega e o primeiro voo.' : 'Claudio te asesora personalmente y te acompaña en la entrega y el primer vuelo.'}</span></div>
+          <div class="fd-claudio"><img src="${esc(Datos.get().claudio.foto)}" alt=""><span>${IDIOMA === 'pt' ? 'Nossa equipe assessora você e acompanha a entrega e o primeiro voo.' : 'Nuestro equipo te asesora y te acompaña en la entrega y el primer vuelo.'}</span></div>
         </div>
       </aside>
     </div></section>

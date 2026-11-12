@@ -37,6 +37,8 @@ const ESQUEMAS = {
     campos: [['t', 'Paso', 'i18n'], ['d', 'Explicación', 'i18narea']] },
   valores: { titulo: 'Lo que nos destaca (inicio y Nosotros)', nuevo: () => ({ icono: 'escudo', t: { es: 'Nuevo' }, d: {} }), resumen: x => ({ ico: x.icono, tit: tx(x.t), sub: tx(x.d) }),
     campos: [['t', 'Título', 'i18n'], ['d', 'Texto', 'i18narea'], ['icono', 'Ícono', 'icono']] },
+  equipo: { titulo: 'El equipo (Nosotros)', nuevo: () => ({ icono: 'usuarios', t: { es: 'Nueva área' }, n: '', d: {} }), resumen: x => ({ ico: x.icono, tit: tx(x.t), sub: x.n || tx(x.d) }),
+    campos: [['t', 'Área o tarea', 'i18n'], ['n', 'Nombre (opcional: se ve en la página)', 'texto'], ['d', 'Qué hace', 'i18narea'], ['icono', 'Ícono', 'icono']] },
   faq: { titulo: 'Preguntas frecuentes (servicio técnico)', nuevo: () => ({ p: { es: 'Nueva pregunta' }, r: {} }), resumen: x => ({ ico: 'mas', tit: tx(x.p), sub: tx(x.r) }),
     campos: [['p', 'Pregunta', 'i18n'], ['r', 'Respuesta', 'i18narea']] },
   tiposService: { titulo: 'Tipos de service (para pedir turno)', nuevo: () => ({ es: 'Nuevo tipo', pt: '' }), resumen: x => ({ ico: 'motor', tit: tx(x), sub: x.pt || '' }),
@@ -123,6 +125,7 @@ function campoAdmin(k, et, tipo, v){
     case 'usd': h = `<div class="ae-usd"><span>USD</span><input id="${id}" data-ruta="${k}" data-num inputmode="decimal" value="${v ? usd(v) : ''}" placeholder="0"></div>`; break;
     case 'fecha': h = `<input id="${id}" type="date" data-ruta="${k}" value="${esc(v || '')}">`; break;
     case 'check': return `<label class="ae-check"><input type="checkbox" data-ruta="${k}" data-check ${v !== false && v ? 'checked' : ''}><span></span>${et}</label>`;
+    case 'portada': h = `<select data-ruta="${k}">${PORTADAS.map(([id, n]) => `<option value="${id}" ${id === v ? 'selected' : ''}>${n}</option>`).join('')}</select>`; break;
     case 'i18n': h = i18(k, v); break;
     case 'i18narea': h = i18(k, v, true); break;
     case 'categoria': h = `<select data-ruta="${k}">${Datos.get().categorias.map(c => `<option value="${c.id}" ${c.id === v ? 'selected' : ''}>${esc(tx(c.n))}</option>`).join('')}</select>`; break;

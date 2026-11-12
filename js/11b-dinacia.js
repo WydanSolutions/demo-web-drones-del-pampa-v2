@@ -35,7 +35,7 @@ PAGINAS.dinacia = {
       ['gota', LG('MGAP, si aplicás fitosanitarios', 'MGAP, se aplica defensivos'), LG('Inscripción en el RUO, el dron en el Registro de Equipos Aplicadores (lleva un sticker) y carné de aplicador para piloto y ayudante.', 'Inscrição no RUO, o drone no Registro de Equipamentos Aplicadores (leva um adesivo) e carteira de aplicador para piloto e ajudante.')]];
     const como = [
       [LG('Completás el formulario', 'Você preenche o formulário'), LG('Desde el celular, en unos 10 minutos. Las fotos las sacás ahí mismo.', 'Pelo celular, em uns 10 minutos. As fotos você tira ali mesmo.')],
-      [LG('Revisamos todo', 'Revisamos tudo'), LG('Claudio controla que no falte nada y te avisa si hay que sumar algo.', 'O Claudio confere que não falte nada e avisa se precisar de algo mais.')],
+      [LG('Revisamos todo', 'Revisamos tudo'), LG('Nuestro equipo controla que no falte nada y te avisa si hay que sumar algo.', 'Nossa equipe confere que não falte nada e avisa se precisar de algo mais.')],
       [LG('Presentamos el trámite', 'Apresentamos o processo'), LG('Hacemos la presentación ante DINACIA (y el MGAP si corresponde) y lo seguimos por vos.', 'Fazemos a apresentação na DINACIA (e no MGAP, se for o caso) e acompanhamos por você.')],
       [LG('Tu dron, en regla', 'Seu drone, em dia'), LG('Te entregamos el número de registro y te lo dejamos puesto en el dron.', 'Entregamos o número de registro e deixamos colocado no drone.')]];
     return `
@@ -47,7 +47,7 @@ PAGINAS.dinacia = {
           <h1 class="titulo" data-dividir>${LG('Inscribí tu dron ante DINACIA, sin vueltas', 'Registre seu drone na DINACIA, sem complicação')}</h1>
           <p class="sub">${LG('Nos encargamos del trámite: completás un formulario, revisamos que esté todo y lo presentamos por vos. Vos seguís volando.', 'Nós cuidamos do processo: você preenche um formulário, revisamos que esteja tudo certo e apresentamos por você. Você continua voando.')}</p>
           <div class="din-hero-btns"><button class="btn btn-azul magnetico" onclick="irAFormDin()">${LG('Empezar la inscripción', 'Começar o registro')} ${icono('flecha')}</button>
-            <a class="btn btn-borde" href="${waLink(LG('¡Hola Claudio! Quiero consultar por la inscripción de mi dron ante DINACIA.', 'Olá Claudio! Quero consultar sobre o registro do meu drone na DINACIA.'))}" target="_blank" rel="noopener">${icono('wa')} ${LG('Consultar a Claudio', 'Consultar o Claudio')}</a></div>
+            <a class="btn btn-borde" href="${waLink(LG('¡Hola, Drones del Pampa! Quiero consultar por la inscripción de mi dron ante DINACIA.', 'Olá, Drones del Pampa! Quero consultar sobre o registro do meu drone na DINACIA.'))}" target="_blank" rel="noopener">${icono('wa')} ${LG('Consultar por WhatsApp', 'Consultar pelo WhatsApp')}</a></div>
           <ul class="din-chips"><li>${icono('check')}${LG('Drones de más de 25 kg', 'Drones de mais de 25 kg')}</li><li>${icono('check')}${LG('Uso propio o para terceros', 'Uso próprio ou para terceiros')}</li><li>${icono('check')}${LG('Te avisamos cada paso', 'Avisamos cada etapa')}</li></ul>
         </div>
         <div class="din-carne" data-aparece="der">
@@ -75,9 +75,9 @@ PAGINAS.dinacia = {
       <aside class="din-lado">
         <span class="etiqueta"><i></i>${LG('Formulario', 'Formulário')}</span>
         <h2 class="titulo chico">${LG('Datos para la inscripción', 'Dados para o registro')}</h2>
-        <p class="sub">${LG('Lo que no sepas, dejalo en blanco: Claudio te ayuda a completarlo. Se guarda solo mientras lo llenás.', 'O que não souber, deixe em branco: o Claudio ajuda a completar. Fica salvo enquanto você preenche.')}</p>
+        <p class="sub">${LG('Lo que no sepas, dejalo en blanco: te ayudamos a completarlo. Se guarda solo mientras lo llenás.', 'O que não souber, deixe em branco: ajudamos a completar. Fica salvo enquanto você preenche.')}</p>
         <ol class="din-indice" id="din-indice"></ol>
-        <div class="din-claudio"><img src="${esc(Datos.get().claudio.foto)}" alt=""><span>${LG('¿Dudas con algún dato? Escribile a Claudio y lo vemos juntos.', 'Dúvidas com algum dado? Escreva para o Claudio e vemos juntos.')}</span></div>
+        <a class="din-claudio" href="${waLink(LG('¡Hola, Drones del Pampa! Tengo una duda con la inscripción ante DINACIA.', 'Olá, Drones del Pampa! Tenho uma dúvida sobre o registro na DINACIA.'))}" target="_blank" rel="noopener"><span class="din-dp">${icono('wa')}</span><span>${LG('¿Dudas con algún dato? Escribinos y lo vemos juntos.', 'Dúvidas com algum dado? Escreva para a gente e vemos juntos.')}</span></a>
       </aside>
       <div class="din-form" id="din-form"></div>
     </div></section>
@@ -98,7 +98,7 @@ PAGINAS.dinacia = {
 
 function faqDinacia(){
   return [
-    [LG('¿Cuánto cuesta el registro?', 'Quanto custa o registro?'), LG('El registro del dron en DINACIA y el permiso de trabajo aéreo no tienen costo. El permiso del piloto (DAOD) y el registro en el MGAP tienen aranceles chicos. El costo de nuestra gestión te lo pasa Claudio.', 'O registro do drone na DINACIA e a permissão de trabalho aéreo não têm custo. A permissão do piloto (DAOD) e o registro no MGAP têm taxas pequenas. O custo da nossa gestão o Claudio informa.')],
+    [LG('¿Cuánto cuesta el registro?', 'Quanto custa o registro?'), LG('El registro del dron en DINACIA y el permiso de trabajo aéreo no tienen costo. El permiso del piloto (DAOD) y el registro en el MGAP tienen aranceles chicos. El costo de nuestra gestión te lo pasamos por WhatsApp.', 'O registro do drone na DINACIA e a permissão de trabalho aéreo não têm custo. A permissão do piloto (DAOD) e o registro no MGAP têm taxas pequenas. O custo da nossa gestão informamos pelo WhatsApp.')],
     [LG('Uso el dron solo en mi campo, ¿igual tengo que registrarlo?', 'Uso o drone só no meu campo, mesmo assim preciso registrar?'), LG('Sí. Todos los drones de más de 25 kg se registran, y aplicar fitosanitarios con drones cuenta como aplicación aérea para el MGAP también en uso propio.', 'Sim. Todos os drones de mais de 25 kg são registrados, e aplicar defensivos com drone conta como aplicação aérea para o MGAP também em uso próprio.')],
     [LG('¿Qué pasa si todavía no tengo permiso de piloto?', 'E se ainda não tenho permissão de piloto?'), LG('Podés empezar igual: el dron se registra y en paralelo te anotamos al curso para el permiso DAOD y la habilitación en tu modelo.', 'Pode começar assim mesmo: o drone é registrado e em paralelo inscrevemos você no curso para a permissão DAOD e a habilitação no seu modelo.')],
     [LG('¿Dónde va el número de registro?', 'Onde vai o número de registro?'), LG('Tiene que verse a los dos costados y en la parte de arriba y de abajo del dron. Cuando esté listo, te lo dejamos puesto.', 'Deve ficar visível nas duas laterais e na parte de cima e de baixo do drone. Quando estiver pronto, deixamos colocado.')],
@@ -233,13 +233,13 @@ function enviarDin(){
   const D = Datos.get(); D.dinacia = D.dinacia || []; D.dinacia.unshift(reg); Datos.guardar();
   try { sessionStorage.removeItem('dp_dinacia'); } catch (e) {}
   const nom = primerNombre(reg.nombre), modelo = reg.modelo === LG('Otro', 'Outro') ? reg.fabricante + ' ' + (reg.modeloOtro || '') : reg.modelo;
-  const msg = LG(`¡Hola Claudio! Acabo de mandar la inscripción de mi dron ante DINACIA por la página (${numero}). ${modelo} · N° ${reg.serie}. Soy ${reg.nombre} · ${reg.tel}.`,
-    `Olá Claudio! Acabei de enviar o registro do meu drone na DINACIA pelo site (${numero}). ${modelo} · N° ${reg.serie}. Sou ${reg.nombre} · ${reg.tel}.`);
+  const msg = LG(`¡Hola, Drones del Pampa! Acabo de mandar la inscripción de mi dron ante DINACIA por la página (${numero}). ${modelo} · N° ${reg.serie}. Soy ${reg.nombre} · ${reg.tel}.`,
+    `Olá, Drones del Pampa! Acabei de enviar o registro do meu drone na DINACIA pelo site (${numero}). ${modelo} · N° ${reg.serie}. Sou ${reg.nombre} · ${reg.tel}.`);
   $('#din-form').innerHTML = `<div class="ok-caja din-ok-caja"><svg viewBox="0 0 80 80" class="ok-anim"><circle cx="40" cy="40" r="36"/><path d="M24 41l11 11 22-24"/></svg>
     <h3>${LG(`¡Listo, ${nom}! Recibimos tu inscripción`, `Pronto, ${nom}! Recebemos o seu registro`)}</h3>
-    <p>${LG('Claudio la revisa y en las próximas horas te escribe para confirmar los datos y contarte cómo sigue el trámite.', 'O Claudio revisa e nas próximas horas escreve para confirmar os dados e explicar como segue o processo.')}</p>
+    <p>${LG('Nuestro equipo la revisa y en las próximas horas te escribe para confirmar los datos y contarte cómo sigue el trámite.', 'Nossa equipe revisa e nas próximas horas escreve para confirmar os dados e explicar como segue o processo.')}</p>
     <div class="din-num-final"><small>${LG('Tu número de trámite', 'Seu número de processo')}</small><b>${numero}</b></div>
-    <a class="btn btn-wa" href="${waLink(msg)}" target="_blank" rel="noopener">${icono('wa')} ${LG('Avisarle a Claudio por WhatsApp', 'Avisar o Claudio pelo WhatsApp')}</a></div>`;
+    <a class="btn btn-wa" href="${waLink(msg)}" target="_blank" rel="noopener">${icono('wa')} ${LG('Avisarnos por WhatsApp', 'Avisar pelo WhatsApp')}</a></div>`;
   $('#din-indice').innerHTML = PASOS_DIN().map(([n]) => `<li class="hecho"><button type="button" disabled><span>${icono('check')}</span>${n}</button></li>`).join('');
   _din = dinNuevo(); _dinPaso = 0;
   if (typeof confeti === 'function') confeti();

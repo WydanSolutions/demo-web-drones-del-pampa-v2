@@ -16,14 +16,14 @@ function textosFestejo(c, v, espera){
     txt: `As vagas de «${curso}» estão completas, mas guardamos o seu lugar na fila. Se abrir uma vaga, entramos em contato com você na hora.`
   } : {
     pre: `Parabéns, ${nom}!`, tit: 'Sua inscrição foi recebida',
-    txt: `Você está inscrito no curso «${curso}». Nas próximas horas o Claudio ou alguém da equipe da Drones del Pampa vai entrar em contato com você para confirmar a vaga e explicar como seguir.`
+    txt: `Você está inscrito no curso «${curso}». Nas próximas horas alguém da nossa equipe vai entrar em contato com você para confirmar a vaga e explicar como seguir.`
   };
   return espera ? {
     pre: `¡Gracias, ${nom}!`, tit: 'Quedaste en la lista de espera',
     txt: `Los cupos de «${curso}» están completos, pero te guardamos el lugar en la fila. Si se libera uno, te avisamos enseguida.`
   } : {
     pre: `¡Felicitaciones, ${nom}!`, tit: 'Ya estás inscripto al curso',
-    txt: `Tu lugar en «${curso}» quedó reservado. En las próximas horas Claudio o alguien del equipo de Drones del Pampa se va a comunicar con vos para confirmar la inscripción y contarte cómo seguir.`
+    txt: `Tu lugar en «${curso}» quedó reservado. En las próximas horas alguien de nuestro equipo se va a comunicar con vos para confirmar la inscripción y contarte cómo seguir.`
   };
 }
 
@@ -33,8 +33,8 @@ const pasosFestejo = espera => PT()
 
 function mensajeWaInscripcion(c, v, numero){
   return PT()
-    ? `Olá Claudio! 🙌 Acabei de me inscrever no curso «${tx(c.titulo)}» (${fechaLarga(c.fecha)}). Sou ${v.nombre} · ${v.tel}. Inscrição ${numero}. Fico no aguardo da confirmação. Obrigado!`
-    : `¡Hola Claudio! 🙌 Me acabo de inscribir al curso «${tx(c.titulo)}» del ${fechaLarga(c.fecha)}. Soy ${v.nombre} · ${v.tel}. Inscripción ${numero}. Quedo atento a la confirmación. ¡Gracias!`;
+    ? `Olá, Drones del Pampa! 🙌 Acabei de me inscrever no curso «${tx(c.titulo)}» (${fechaLarga(c.fecha)}). Sou ${v.nombre} · ${v.tel}. Inscrição ${numero}. Fico no aguardo da confirmação. Obrigado!`
+    : `¡Hola, Drones del Pampa! 🙌 Me acabo de inscribir al curso «${tx(c.titulo)}» del ${fechaLarga(c.fecha)}. Soy ${v.nombre} · ${v.tel}. Inscripción ${numero}. Quedo atento a la confirmación. ¡Gracias!`;
 }
 
 // Comprobante: el mismo en la ventana y en la caja del costado
@@ -74,7 +74,7 @@ function festejarInscripcion(c, v, numero, espera){
         <button class="btn btn-azul" onclick="cerrarModal()">${PT() ? 'Perfeito!' : '¡Genial!'}</button>
         <button class="btn btn-borde" onclick="calendarioCurso('${c.id}')">${icono('calendario')} ${PT() ? 'Adicionar à agenda' : 'Agregar a mi calendario'}</button>
       </div>
-      <a class="fe-wa" href="${waLink(mensajeWaInscripcion(c, v, numero))}" target="_blank" rel="noopener">${icono('wa')} ${PT() ? 'Se preferir, avise o Claudio pelo WhatsApp' : 'Si querés, avisale a Claudio por WhatsApp'}</a>
+      <a class="fe-wa" href="${waLink(mensajeWaInscripcion(c, v, numero))}" target="_blank" rel="noopener">${icono('wa')} ${PT() ? 'Se preferir, avise a gente pelo WhatsApp' : 'Si querés, avisanos por WhatsApp'}</a>
     </div>`, { cls: 'chico modal-festejo', alAbrir: m => animarFestejo(m, espera) });
 }
 
@@ -122,7 +122,7 @@ function calendarioCurso(id){
   const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Drones del Pampa//Cursos//ES', 'BEGIN:VEVENT', 'UID:' + c.id + '-' + f + '@dronesdelpampa',
     'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', 'DTSTART;VALUE=DATE:' + f, 'DTEND;VALUE=DATE:' + sig,
     'SUMMARY:' + lim('Curso: ' + tx(c.titulo) + ' · Drones del Pampa'), 'LOCATION:' + lim(tx(c.lugar)),
-    'DESCRIPTION:' + lim((PT() ? 'Duração: ' : 'Duración: ') + tx(c.duracion) + '. ' + (PT() ? 'Dúvidas: fale com o Claudio pelo WhatsApp.' : 'Consultas: hablá con Claudio por WhatsApp.')),
+    'DESCRIPTION:' + lim((PT() ? 'Duração: ' : 'Duración: ') + tx(c.duracion) + '. ' + (PT() ? 'Dúvidas: fale conosco pelo WhatsApp.' : 'Consultas: escribinos por WhatsApp.')),
     'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
   a.download = 'curso-' + c.id + '.ics'; document.body.appendChild(a); a.click(); a.remove();

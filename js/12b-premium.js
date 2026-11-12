@@ -7,8 +7,8 @@
    ===================================================================== */
 function cintaHTML(){
   const items = IDIOMA === 'pt'
-    ? [['escudo', 'Filial oficial DRAGUR'], ['kit', 'Peças originais DJI'], ['motor', 'Assistência técnica própria'], ['calendario', 'Cursos para pilotos'], ['dron', 'Registro na DINACIA'], ['usuarios', 'Atendimento pessoal do Claudio']]
-    : [['escudo', 'Sucursal oficial DRAGUR'], ['kit', 'Repuestos originales DJI'], ['motor', 'Servicio técnico propio'], ['calendario', 'Cursos para pilotos'], ['dron', 'Registro ante DINACIA'], ['usuarios', 'Atención personal de Claudio']];
+    ? [['escudo', 'Filial oficial DRAGUR'], ['kit', 'Peças originais DJI'], ['motor', 'Assistência técnica própria'], ['calendario', 'Cursos para pilotos'], ['dron', 'Registro na DINACIA'], ['usuarios', 'Atendimento personalizado']]
+    : [['escudo', 'Sucursal oficial DRAGUR'], ['kit', 'Repuestos originales DJI'], ['motor', 'Servicio técnico propio'], ['calendario', 'Cursos para pilotos'], ['dron', 'Registro ante DINACIA'], ['usuarios', 'Atención personalizada']];
   const fila = items.map(([ic, txt]) => `<span>${icono(ic)}${esc(txt)}</span><i></i>`).join('');
   return `<div class="cinta" aria-hidden="true"><div class="cinta-pista">${fila}${fila}</div></div>`;
 }

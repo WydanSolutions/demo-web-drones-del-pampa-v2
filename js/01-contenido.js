@@ -21,7 +21,8 @@ const CONTENIDO_INICIAL = {
     mapa: 'Rivera, Uruguay',
     horarios: L('Lunes a viernes de 8:30 a 18:30 · Sábados de 8:30 a 12:30', 'Segunda a sexta das 8:30 às 18:30 · Sábados das 8:30 às 12:30'),
     instagram: 'https://www.instagram.com/dragur_rivera_drones_del_pampa/',
-    clave: '1234'
+    clave: '1234',
+    portada: 'video'          // video | estudio | ilustrada (06b-portadas.js)
   },
 
   // El dueño: aparece en el inicio, en Nosotros y en los botones de WhatsApp
@@ -32,8 +33,8 @@ const CONTENIDO_INICIAL = {
     foto2: 'media/claudio/claudio-lanzamiento-t55.jpg',    // opción 7: presentando el T55 en el lanzamiento
     foto3: 'media/claudio/claudio-taller-sentado.jpg',     // opción 5: en el taller, con los repuestos atrás
     video: 'media/instagram/ig-claudio-taller.mp4',
-    frase: L('Antes de venderte un dron, quiero entender tu campo. Te asesoro yo, te acompaño en la puesta en marcha y el taller queda a la vuelta para lo que necesites.',
-             'Antes de vender um drone, quero entender o seu campo. Eu mesmo assessoro, acompanho a colocação em funcionamento e a oficina fica pertinho para o que você precisar.'),
+    frase: L('Antes de venderte un dron, queremos entender tu campo. Con mi equipo te asesoramos, te acompañamos en la puesta en marcha y el taller queda a la vuelta para lo que necesites.',
+             'Antes de vender um drone, queremos entender o seu campo. Com a minha equipe assessoramos você, acompanhamos a colocação em marcha e a oficina fica perto para o que precisar.'),
     historia: L('Drones del Pampa nació en Rivera para acercar la agricultura de precisión a los productores del norte del país. Hoy somos la sucursal oficial de Dragur, representante de DJI Agriculture en Uruguay: vendemos los equipos, los reparamos en nuestro taller con repuestos originales y formamos a los pilotos que los van a volar.',
                 'A Drones del Pampa nasceu em Rivera para aproximar a agricultura de precisão dos produtores do norte do Uruguai. Hoje somos a filial oficial da Dragur, representante da DJI Agriculture no Uruguai: vendemos os equipamentos, consertamos na nossa oficina com peças originais e formamos os pilotos que vão pilotá-los.')
   },
@@ -45,7 +46,7 @@ const CONTENIDO_INICIAL = {
     heroSub: L('Drones agrícolas DJI, repuestos originales, taller propio y cursos para pilotos. En Rivera, con atención personal de Claudio y su equipo.',
                'Drones agrícolas DJI, peças originais, oficina própria e cursos para pilotos. Em Rivera, com atendimento pessoal do Claudio e da sua equipe.'),
     buscasTitulo: L('¿Qué estás buscando?', 'O que você está procurando?'),
-    claudioTitulo: L('Hablás directo con el dueño.', 'Você fala direto com o dono.'),
+    claudioTitulo: L('Claudio y su equipo.', 'O Claudio e a sua equipe.'),
     dronesTitulo: L('Elegí el dron para tu campo', 'Escolha o drone para o seu campo'),
     dronesSub: L('Toda la línea DJI Agras y el Mavic 3M para mapeo. Compará modelos o dejá que te recomendemos uno en 3 preguntas.',
                  'Toda a linha DJI Agras e o Mavic 3M para mapeamento. Compare modelos ou deixe a gente recomendar um em 3 perguntas.'),
@@ -65,6 +66,15 @@ const CONTENIDO_INICIAL = {
   },
 
   // Lo que se destaca en el inicio, debajo de Claudio
+  // El equipo (Nosotros). Sin nombres de empleados a propósito: la web es pública (12/11/2026). Se edita en Administrar › Más contenido.
+  equipo: [
+    { icono: 'usuarios', t: L('Dirección', 'Direção'), n: 'Claudio Vandes', d: L('Fundador y cara de Drones del Pampa. Acompaña cada venta grande y cada entrega.', 'Fundador e rosto da Drones del Pampa. Acompanha cada venda grande e cada entrega.') },
+    { icono: 'estrella', t: L('Ventas y asesoramiento', 'Vendas e assessoria'), n: '', d: L('Te ayudamos a elegir el equipo, armamos la propuesta y respondemos tus consultas por WhatsApp.', 'Ajudamos a escolher o equipamento, montamos a proposta e respondemos pelo WhatsApp.') },
+    { icono: 'motor', t: L('Taller y servicio técnico', 'Oficina e assistência técnica'), n: '', d: L('Técnicos capacitados por Dragur: diagnóstico, reparación y garantía oficial DJI.', 'Técnicos treinados pela Dragur: diagnóstico, conserto e garantia oficial DJI.') },
+    { icono: 'bateria', t: L('Centro de baterías', 'Centro de baterias'), n: '', d: L('Revisión, diagnóstico y reparación de baterías inteligentes.', 'Revisão, diagnóstico e conserto de baterias inteligentes.') },
+    { icono: 'kit', t: L('Administración', 'Administração'), n: '', d: L('Facturas, cobros, repuestos por encargo y trámites como la inscripción ante DINACIA.', 'Notas, cobranças, peças sob encomenda e trâmites como o registro na DINACIA.') }
+  ],
+
   valores: [
     { icono: 'escudo', t: L('Sucursal oficial', 'Filial oficial'), d: L('Garantía DJI y respaldo de toda la red Dragur.', 'Garantia DJI e respaldo de toda a rede Dragur.') },
     { icono: 'motor', t: L('Taller propio', 'Oficina própria'), d: L('Diagnóstico y reparación en Rivera, sin mandar el equipo lejos.', 'Diagnóstico e conserto em Rivera, sem mandar o equipamento para longe.') },

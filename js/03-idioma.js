@@ -7,7 +7,7 @@
 const IDIOMAS = {
   es: {
     p_inicio: 'Inicio', p_drones: 'Drones', p_tienda: 'Tienda', p_cursos: 'Cursos', p_servicio: 'Servicio técnico', p_nosotros: 'Nosotros', p_contacto: 'Contacto', p_mas: 'Más', p_dinacia: 'DINACIA',
-    hablar_claudio: 'Hablar con Claudio', ver_drones: 'Ver los drones', ir_tienda: 'Ir a la tienda', ver_todo: 'Ver todo', volver: 'Volver',
+    hablar_claudio: 'Escribinos por WhatsApp', escribinos: 'Escribinos', conoce_equipo: 'Conocé al equipo', ver_drones: 'Ver los drones', ir_tienda: 'Ir a la tienda', ver_todo: 'Ver todo', volver: 'Volver',
     b_comprar: 'Comprar un dron', b_comprar_d: 'Asesoramiento para elegir el equipo justo para tus hectáreas.',
     b_rep: 'Repuestos', b_rep_d: 'Stock en Rivera de hélices, baterías, motores y más.',
     b_serv: 'Service y reparación', b_serv_d: 'Taller oficial, presupuesto antes de tocar nada.',
@@ -44,13 +44,13 @@ const IDIOMAS = {
     c_telefonos: 'Teléfonos', c_horarios: 'Horarios', c_direccion: 'Dónde estamos', c_email: 'Correo', c_mensaje: '¿En qué te podemos ayudar?',
     c_enviar: 'Enviar mensaje', c_enviado: 'Mensaje enviado. Te respondemos en el día.', c_motivo: 'Motivo', c_m_compra: 'Comprar un dron', c_m_rep: 'Repuestos',
     c_m_serv: 'Servicio técnico', c_m_curso: 'Cursos', c_m_otro: 'Otro', como_llegar: 'Cómo llegar',
-    cta_titulo: '¿Tenés una consulta?', cta_txt: 'Claudio y el equipo te responden por WhatsApp en el día.',
+    cta_titulo: '¿Tenés una consulta?', cta_txt: 'Nuestro equipo te responde por WhatsApp en el día.',
     pie_txt: 'Sucursal oficial Dragur en Rivera. Drones agrícolas DJI, repuestos, servicio técnico y academia de pilotos.',
     administrar: 'Administrar', derechos: 'Todos los derechos reservados.', hecho: 'Página hecha por', idioma: 'Idioma', precios_usd: 'Precios en dólares estadounidenses.'
   },
   pt: {
     p_inicio: 'Início', p_drones: 'Drones', p_tienda: 'Loja', p_cursos: 'Cursos', p_servicio: 'Assistência técnica', p_nosotros: 'Sobre nós', p_contacto: 'Contato', p_mas: 'Mais', p_dinacia: 'DINACIA',
-    hablar_claudio: 'Falar com o Claudio', ver_drones: 'Ver os drones', ir_tienda: 'Ir à loja', ver_todo: 'Ver tudo', volver: 'Voltar',
+    hablar_claudio: 'Fale conosco no WhatsApp', escribinos: 'Fale conosco', conoce_equipo: 'Conheça a equipe', ver_drones: 'Ver os drones', ir_tienda: 'Ir à loja', ver_todo: 'Ver tudo', volver: 'Voltar',
     b_comprar: 'Comprar um drone', b_comprar_d: 'Assessoria para escolher o equipamento certo para seus hectares.',
     b_rep: 'Peças', b_rep_d: 'Estoque em Rivera de hélices, baterias, motores e mais.',
     b_serv: 'Revisão e conserto', b_serv_d: 'Oficina oficial, orçamento antes de mexer em qualquer coisa.',
@@ -87,7 +87,7 @@ const IDIOMAS = {
     c_telefonos: 'Telefones', c_horarios: 'Horários', c_direccion: 'Onde estamos', c_email: 'E-mail', c_mensaje: 'Como podemos ajudar?',
     c_enviar: 'Enviar mensagem', c_enviado: 'Mensagem enviada. Respondemos no mesmo dia.', c_motivo: 'Motivo', c_m_compra: 'Comprar um drone', c_m_rep: 'Peças',
     c_m_serv: 'Assistência técnica', c_m_curso: 'Cursos', c_m_otro: 'Outro', como_llegar: 'Como chegar',
-    cta_titulo: 'Tem alguma dúvida?', cta_txt: 'O Claudio e a equipe respondem pelo WhatsApp no mesmo dia.',
+    cta_titulo: 'Tem alguma dúvida?', cta_txt: 'Nossa equipe responde pelo WhatsApp no mesmo dia.',
     pie_txt: 'Filial oficial Dragur em Rivera. Drones agrícolas DJI, peças, assistência técnica e academia de pilotos.',
     administrar: 'Administrar', derechos: 'Todos os direitos reservados.', hecho: 'Site feito por', idioma: 'Idioma', precios_usd: 'Preços em dólares americanos.'
   }

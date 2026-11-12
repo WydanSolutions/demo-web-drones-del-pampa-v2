@@ -81,7 +81,7 @@ function dibujarMarco(){
       <div class="nav-acciones">
         ${selectorIdioma()}
         <button class="nav-carrito" aria-label="${t('carrito')}" onclick="abrirCarrito()">${icono('carrito')}<b class="burbuja" id="burbuja">0</b></button>
-        <a class="nav-claudio" href="${waLink(msjClaudio())}" target="_blank" rel="noopener"><img src="${esc(cl.foto)}" alt=""><span>${t('hablar_claudio')}</span>${icono('wa')}</a>
+        <a class="nav-claudio" href="${waLink(msjClaudio())}" target="_blank" rel="noopener">${icono('wa')}<span>${t('escribinos')}</span></a>
       </div>
     </div>`;
   $('#barra').innerHTML = [...MENU.slice(0, 4), ['mas', 'p_mas', 'menu']].map(([id, k, ic]) =>
@@ -91,14 +91,15 @@ function dibujarMarco(){
     ${MENU.slice(4).map(([id, k, ic]) => `<a href="#/${id}" class="mas-item">${icono(ic)}<span>${t(k)}</span>${icono('flecha')}</a>`).join('')}
     <div class="mas-idioma"><span>${t('idioma')}</span>${selectorIdioma()}</div>
     <a class="btn btn-wa" href="${waLink(msjClaudio())}" target="_blank" rel="noopener">${icono('wa')} ${t('hablar_claudio')}</a>`;
-  $('#wa-flotante').href = waLink(msjClaudio()); $('#wa-flotante').innerHTML = `<img src="${esc(cl.foto)}" alt="">${icono('wa')}`;
+  $('#wa-flotante').href = waLink(msjClaudio()); $('#wa-flotante').innerHTML = `<span class="wa-logo">${iconoDP({ cls: 'wa-logo-dp' })}</span>${icono('wa')}`; $('#wa-flotante').setAttribute('aria-label', t('hablar_claudio'));
   $$('[data-idioma]').forEach(b => b.onclick = () => { cerrarMas(); cambiarIdioma(b.dataset.idioma); });
   actualizarBurbuja();
   if (_rutaActual) marcarMenu(_rutaActual.seccion);
 }
 const selectorIdioma = () => `<div class="idioma" role="group" aria-label="${t('idioma')}"><span class="idioma-luz ${IDIOMA}"></span>
   <button data-idioma="es" class="${IDIOMA === 'es' ? 'act' : ''}">ES</button><button data-idioma="pt" class="${IDIOMA === 'pt' ? 'act' : ''}">PT</button></div>`;
-const msjClaudio = () => IDIOMA === 'pt' ? 'Olá Claudio! Vi o site da Drones del Pampa e quero fazer uma consulta.' : '¡Hola Claudio! Vi la página de Drones del Pampa y quiero hacer una consulta.';
+// Los mensajes van a Drones del Pampa (responde el equipo, no siempre Claudio) — pedido del 12/11/2026
+const msjClaudio = () => IDIOMA === 'pt' ? 'Olá, Drones del Pampa! Vi o site e quero fazer uma consulta.' : '¡Hola, Drones del Pampa! Vi la página y quiero hacer una consulta.';
 
 function marcarMenu(sec){
   $$('[data-sec]').forEach(a => a.classList.toggle('act', a.dataset.sec === sec || (sec !== 'inicio' && !MENU.slice(0, 4).some(m => m[0] === sec) && a.dataset.sec === 'mas' && a.classList.contains('barra-item'))));
@@ -113,7 +114,7 @@ function pieHTML(){
   const c = Datos.get().config, cl = Datos.get().claudio;
   return `<footer class="pie">
     <div class="contenedor"><div class="pie-cta" data-aparece>
-      <img class="pie-cta-foto" src="${esc(cl.foto)}" alt="${esc(cl.nombre)}">
+      <span class="pie-cta-foto pie-cta-logo">${iconoDP({ cls: 'pie-cta-dp' })}</span>
       <div><h3>${t('cta_titulo')}</h3><p>${t('cta_txt')}</p></div>
       <a class="btn btn-wa" href="${waLink(msjClaudio())}" target="_blank" rel="noopener">${icono('wa')} ${t('hablar_claudio')}</a>
       <svg class="pie-cta-dron" viewBox="${DP.vbIcono}">${dpDefs('pc')}${dpDron('pc')}</svg>
