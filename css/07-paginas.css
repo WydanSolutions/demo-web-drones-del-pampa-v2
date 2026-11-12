@@ -49,6 +49,7 @@
 .nc-2{right:0;top:12%;width:34%;height:58%}
 .nc-3{left:26%;bottom:0;width:40%;height:42%;border:6px solid #fff}
 .nc-3 img{object-position:50% 20%}
+.nc-1 figcaption{top:12px;bottom:auto}   /* la foto de Claudio (nc-3) tapaba el cartel «Nuestro local» */
 .carta{position:relative;display:grid;grid-template-columns:220px 1fr;gap:clamp(30px,5vw,60px);align-items:center}
 .carta-foto{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:6px solid rgba(255,255,255,.85)}
 .carta-txt{font:500 clamp(20px,2.2vw,30px)/1.45 var(--f-titulo);margin-top:20px}

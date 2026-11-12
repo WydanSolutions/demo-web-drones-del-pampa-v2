@@ -50,7 +50,7 @@ function observarApariciones(root){
     if (el.matches('[data-dividir]')) { gsap.fromTo($$('.pal > span', el), { yPercent: 115 }, { yPercent: 0, duration: 1.05, stagger: .045, ease: 'expo.out' }); return; }
     const hermanos = el.parentElement ? $$(':scope > [data-aparece]', el.parentElement) : [el];
     const i = Math.max(0, hermanos.indexOf(el));
-    gsap.to(el, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.05, delay: Math.min(i, 6) * .07, ease: 'expo.out', clearProps: 'transform' });
+    gsap.to(el, { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.05, delay: Math.min(i, 6) * .07, ease: 'expo.out', onStart: () => el.classList.add('visto'), clearProps: 'transform' });
   }), { rootMargin: '0px 0px -6% 0px', threshold: .06 });
   $$('[data-aparece], [data-dividir]', root).forEach(el => {
     if (el.matches('h1')) return;                       // el título principal lo anima entradaPagina

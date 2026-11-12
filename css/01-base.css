@@ -116,10 +116,11 @@ input,select,textarea{font:inherit;font-size:16px;color:inherit}
 .noche .precio{color:#fff}
 
 /* --- Aparecer al bajar (sin JS se ve igual) --- */
-html.anim [data-aparece]{opacity:0;transform:translateY(36px)}
-html.anim [data-aparece="izq"]{transform:translateX(-46px)}
-html.anim [data-aparece="der"]{transform:translateX(46px)}
-html.anim [data-aparece="zoom"]{transform:scale(.93)}
+/* «.visto» = ya apareció: sin esto, al terminar la animación el bloque volvía a correrse y se encimaba (12/11/2026) */
+html.anim [data-aparece]:not(.visto){opacity:0;transform:translateY(36px)}
+html.anim [data-aparece="izq"]:not(.visto){transform:translateX(-46px)}
+html.anim [data-aparece="der"]:not(.visto){transform:translateX(46px)}
+html.anim [data-aparece="zoom"]:not(.visto){transform:scale(.93)}
 
 /* --- Ventanas --- */
 .velo{position:fixed;inset:0;z-index:900;background:rgba(5,21,58,.5);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
